@@ -1,4 +1,4 @@
-from app.schemas.itemsSchema import Item
+from app.schemas.storeSchemas import Item,buyItem
 from fastapi.encoders import jsonable_encoder
 from fastapi import FastAPI,Depends
 import logging
@@ -35,27 +35,41 @@ async def delete_all_item(con:Controller = Depends(Controller)):
 
 
 #get Item
-@app.get("/getItem/{itemId}")
-async def get_item(itemId: str,con:Controller = Depends(Controller)):
+@app.get("/getItem/{itemName}")
+async def get_item(itemName: str,con:Controller = Depends(Controller)):
     """ 
     Forwards to controller to get Item by itemId
     Args:
         itemid (str): uuid 
     Retruns the item if was able to find or error message
     """
-    logger.info(f"retrieve key {itemId}")
-    return con.getItem(itemId)
+    logger.info(f"retrieve key {itemName}")
+    return con.getItem(itemName)
 
     
 
 #delete item
-@app.put("/deleteItem/{itemId}")
-async def delete_item(itemId: str,con:Controller = Depends(Controller)):
+@app.put("/deleteItem/{itemName}")
+async def delete_item(itemName: str,con:Controller = Depends(Controller)):
     """ 
     Forwards to controller to delete  items 
     Args:
         itemid (str): uuid 
     Retruns status if was able to delete 
     """
-    logger.info(f"delete item {itemId}")
-    return con.deleteItem(itemId)
+    logger.info(f"delete item {itemName}")
+    return con.deleteItem(itemName)
+
+@app.post("/buyItem/")
+async def but_item(bItem: buyItem,con:Controller = Depends(Controller)):
+    """
+    Forwords to controller to add amount to item
+    """
+    return con.changeItemAmount(jsonable_encoder(bItem),"reduce")
+
+@app.post("/returnItem/")
+async def return_item(rItem: buyItem,con:Controller = Depends(Controller)):
+    """
+    Forwords to controller to reduce amount to item
+    """
+    return con.changeItemAmount(jsonable_encoder(rItem),"increase")
