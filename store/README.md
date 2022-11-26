@@ -1,5 +1,5 @@
 # Simple Store
-![store](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fshop-outside&psig=AOvVaw3AOrT1VKLzMS7AXZ9M7gyC&ust=1669564461839000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCJiIuLaazPsCFQAAAAAdAAAAABAE" simple store)
+
 
 This is a simple representaiton of a store . The following steps will show how to install and run the application.   
 **This project is for learning purposes only** 
